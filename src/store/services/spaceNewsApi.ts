@@ -1,5 +1,5 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import type {IArticleResponse} from "../../types/article";
+import type {IArticle, IArticleResponse} from "../../types/article";
 
 export const spaceNewsApi = createApi({
     reducerPath: "spaceNewsApi",
@@ -7,7 +7,10 @@ export const spaceNewsApi = createApi({
     endpoints: (builder) => ({
         getArticles: builder.query<IArticleResponse, void>({
             query: () => '/articles/',
+        }),
+        getArticlesById: builder.query<IArticle, string>({
+            query:(id) => `articles/${id}/`,
         })
     })
 })
-export const {useGetArticlesQuery} = spaceNewsApi;
+export const {useGetArticlesQuery, useGetArticlesByIdQuery} = spaceNewsApi;
